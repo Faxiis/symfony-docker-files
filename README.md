@@ -36,7 +36,7 @@ Visiter : https://localhost
 
 # Modifications apportées au projet dunglas 
 Original : https://github.com/dunglas/symfony-docker
-1. Suppression automatique de l'exécution de compose à chaque execution
+1. Suppression automatique de l'exécution de composer à chaque execution
 2. Ajout des drivers MSSQL
 3. Ajout de SQL Server
 4. Ajout de "host.docker.internal:host-gateway" pour se connecter à SQL Server sur L'hôte
