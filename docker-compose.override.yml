@@ -4,7 +4,7 @@ version: "3.4"
 services:
   php:
     build:
-      target: app_php_dev
+      target: app_php
     volumes:
       - ./:/srv/app
       - ./docker/php/conf.d/app.dev.ini:/usr/local/etc/php/conf.d/app.dev.ini:ro
@@ -18,11 +18,6 @@ services:
       # Ensure that host.docker.internal is correctly defined on Linux
       - host.docker.internal:host-gateway
 
-  caddy:
-    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile", "--watch"]
-    volumes:
-      - ./public:/srv/app/public:ro
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
