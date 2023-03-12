@@ -127,6 +127,5 @@ RUN addgroup -g 1000 symfony \
 
 FROM node:18-alpine as encore
 WORKDIR /src
-COPY ["package.json", "package-lock.json*", "./"]
 ENV NODE_ENV=development
 CMD ["nodemon", "bin/www"]
