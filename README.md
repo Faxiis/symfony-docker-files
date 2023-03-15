@@ -1,8 +1,4 @@
-# Customer - Projet d'exemple pour Symfony 6.2
-
-## Cloner le projet
-    git clone git@github.com:iia-tawfiq/symfony-docker-files.git commandeSymfony
-
+# Mise en place de Symfony Docker
 
 ## Création des conteneur (ce n'est pas nécessaire)
 Sans -d on ne veux plus que les conteneur soit lancé en permanence
