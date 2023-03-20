@@ -113,7 +113,7 @@ sudo phpenmod -v 8.2 sqlsrv pdo_sqlsrv
 
 echo -e "${GREEN}Le script est terminé !${NC}"
 
-dns_server=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
-echo "Adresse du serveur pour la base de données : $dns_server"
+database_ip=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
+echo "Adresse du serveur pour la base de données : $database_ip"
 
-echo "isql -v -k \"DRIVER={ODBC Driver 18 for SQL Server};SERVER=172.27.96.1;UID=sa;PWD=sql2019;TrustServerCertificate=Yes\""
+echo "isql -v -k \"DRIVER={ODBC Driver 18 for SQL Server};SERVER=$database_ip;UID=sa;PWD=sql2019;TrustServerCertificate=Yes\""
