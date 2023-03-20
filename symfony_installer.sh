@@ -105,8 +105,10 @@ fi
 if ! pecl list | grep -q 'pdo_sqlsrv'; then
     sudo pecl install pdo_sqlsrv
 fi
-echo "; priority=20\nextension=sqlsrv.so\n" | sudo tee /etc/php/8.2/mods-available/sqlsrv.ini >/dev/null
-echo "; priority=30\nextension=pdo_sqlsrv.so\n" | sudo tee /etc/php/8.2/mods-available/pdo_sqlsrv.ini >/dev/null
+
+sudo sh -c 'echo "; priority=20\nextension=sqlsrv.so\n" > /etc/php/8.2/mods-available/sqlsrv.ini'
+sudo sh -c 'echo "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/8.2/mods-available/pdo_sqlsrv.ini'
+
 
 echo -e "${YELLOW}Installation des extensions PHP pour Sql Server${NC}"
 sudo phpenmod -v 8.2 sqlsrv pdo_sqlsrv
