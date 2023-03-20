@@ -15,7 +15,7 @@ echo -e "${YELLOW}Ajout des paquets${NC}"
 # Ajout des paquets
 echo -e "${YELLOW}Ajout des paquets${NC}"
 sudo apt update
-sudo apt -y install unixodbc lsb-release ca-certificates apt-transport-https software-properties-common
+sudo apt -y install lsb-release ca-certificates apt-transport-https software-properties-common
 sudo add-apt-repository -y ppa:ondrej/php
 sudo apt update
 
@@ -76,6 +76,27 @@ symfony check:requirements
 
 echo -e "${YELLOW}Installation des drivers Sql Server${NC}"
 
+if ! [[ "18.04 20.04 22.04" == *"$(lsb_release -rs)"* ]];
+then
+    echo "Ubuntu $(lsb_release -rs) is not currently supported.";
+    exit;
+fi
+
+sudo su -c "curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -"
+
+sudo sh -c "curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | tee /etc/apt/sources.list.d/mssql-release.list >/dev/null"
+
+sudo apt-get update
+sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
+# optional: for bcp and sqlcmd
+sudo ACCEPT_EULA=Y apt-get install -y mssql-tools18
+echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc
+source ~/.bashrc
+# optional: for unixODBC development headers
+sudo apt-get install -y unixodbc-dev
+
+
+
 
 if ! pecl list | grep -q 'sqlsrv'; then
     sudo pecl install sqlsrv
@@ -91,3 +112,8 @@ echo -e "${YELLOW}Installation des extensions PHP pour Sql Server${NC}"
 sudo phpenmod -v 8.2 sqlsrv pdo_sqlsrv
 
 echo -e "${GREEN}Le script est terminé !${NC}"
+
+dns_server=$(grep nameserver /etc/resolv.conf | awk '{print $2}')
+echo "Adresse du serveur pour la base de données : $dns_server"
+
+echo "isql -v -k \"DRIVER={ODBC Driver 18 for SQL Server};SERVER=172.27.96.1;UID=sa;PWD=sql2019;TrustServerCertificate=Yes\""
