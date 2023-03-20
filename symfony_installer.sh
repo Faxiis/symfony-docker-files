@@ -127,12 +127,12 @@ if ! pecl list | grep -q 'pdo_sqlsrv'; then
 fi
 
 # Configuration des extensions SQL Server pour PHP
-if [ ! -f /etc/php/{PHP_VERSION}/mods-available/sqlsrv.ini ]; then
-    sudo sh -c 'echo "; priority=20\nextension=sqlsrv.so\n" > /etc/php/{PHP_VERSION}/mods-available/sqlsrv.ini'
+if [ ! -f /etc/php/${PHP_VERSION}/mods-available/sqlsrv.ini ]; then
+    sudo sh -c 'echo "; priority=20\nextension=sqlsrv.so\n" > /etc/php/${PHP_VERSION}/mods-available/sqlsrv.ini'
 fi
 
-if [ ! -f /etc/php/{PHP_VERSION}/mods-available/pdo_sqlsrv.ini ]; then
-    sudo sh -c 'echo "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/{PHP_VERSION}/mods-available/pdo_sqlsrv.ini'
+if [ ! -f /etc/php/${PHP_VERSION}/mods-available/pdo_sqlsrv.ini ]; then
+    sudo sh -c 'echo "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/${PHP_VERSION}/mods-available/pdo_sqlsrv.ini'
 fi
 
 
