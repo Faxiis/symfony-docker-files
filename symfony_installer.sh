@@ -8,7 +8,7 @@ NC='\033[0m' # No Color
 
 # Define versions
 PHP_VERSION=8.2
-NODE_VERSION=16.14.0
+NODE_VERSION=18
 
 # Mises à jour
 echo -e "${YELLOW}Mises à jour${NC}"
